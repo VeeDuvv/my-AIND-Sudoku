@@ -1,0 +1,15 @@
+
+This file contains the steps I took to develop the naked twins solution
+
+1. open anaconda prompt
+2. within conda prompt: installed git using "conda install git"
+3. within conda prompt: cloned aind from github using "git clone https://github.com/udacity/AIND-Sudoku.git
+4. within conda prompt: activated aind environment using "activate aind"
+5. within conda prompt: go to the cloned directory using "cd C:\Users\vamsi\Documents\Learning\aind\AIND-Sudoku"
+
+6. wrote code using sublime text 3 app - update solution.py
+
+7. within conda prompt: test code locally using "python -m unittest"
+8. within conda prompt: run "pip insall pygame" [package was already installed when the environment was created]
+9. within conda prompt: run "pip insall udacity-pa"
+10. within conda prompt: run "udacity submit"
