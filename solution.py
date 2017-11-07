@@ -164,7 +164,6 @@ def eliminate(values):
 				peers = list(set().union(row_units[box_row_idx], column_units[box_column_idx], square_units[box_square_idx], diagonal_units[1]))
 			else:
 				peers = list(set().union(row_units[box_row_idx], column_units[box_column_idx], square_units[box_square_idx]))
-
 			# for each peer, if it's unsolved, remove box's value from peer's value options
 			for peer in peers:
 				old_peer_value = values[peer]
@@ -189,6 +188,7 @@ def only_choice(values):
 				dict_n_count[s] = int(dict_n_count[s]) + 1
 		#print(dict_n_count)
 
+		# entering some random comment
 		for key, value in dict_n_count.items():
 			if value == 1:
 				for box in a_unit:
