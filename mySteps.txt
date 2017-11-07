@@ -13,3 +13,4 @@ This file contains the steps I took to develop the naked twins solution
 8. within conda prompt: run "pip insall pygame" [package was already installed when the environment was created]
 9. within conda prompt: run "pip insall udacity-pa"
 10. within conda prompt: run "udacity submit"
+11. using atom commit the changes into my github repository
