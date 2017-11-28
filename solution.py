@@ -143,6 +143,13 @@ def display(values):
 	#pass
 
 def eliminate(values):
+	"""
+	For boxes with correct values, eliminate those values from the row, column, square and diagonal peers.
+	Args:
+		values(dict): The sudoku in dictionary form.
+	Returns:
+		the values dictionary after eliminating all obvious choices.
+	"""
 	#print("In eliminate")
 	row=['A','B','C','D','E','F','G','H','I']
 	# for each box in the dictionary
@@ -173,6 +180,14 @@ def eliminate(values):
 	return values
 
 def only_choice(values):
+	"""
+	For each unit, count the possible values for each digit.
+	Then for the boxes with only one possible value, assign it to the dictionary
+	Args:
+		values(dict): The sudoku in dictionary form.
+	Returns:
+		the values dictionary after looking for only choices.
+	"""
 	#print("In only_choice")
 	all_units = row_units + column_units + square_units + diagonal_units
 
@@ -186,43 +201,55 @@ def only_choice(values):
 			box_val = values[box]
 			for s in box_val:
 				dict_n_count[s] = int(dict_n_count[s]) + 1
-		#print(dict_n_count)
 
 		# entering some random comment
 		for key, value in dict_n_count.items():
 			if value == 1:
 				for box in a_unit:
 					if key in values[box]:
-						#values[box] = key
 						assign_value(values, box, key)
 
 	return values
 
 def reduce_puzzle(values):
-	"""Reduce puzzle by calling eliminate and only_choice until stalled."""
-	#print("reduce puzzle")
+	"""Reduce puzzle by calling eliminate and only_choice until stalled.
+	Display the values as a 2-D grid.
+	Args:
+		values(dict): The sudoku in dictionary form.
+	Returns:
+		the values dictionary after reducing puzzle.
+	"""
+
 	stalled = False
 	while not stalled:
 		# Check how many boxes have a determined value
 		solved_values_before = len([box for box in values.keys() if len(values[box]) == 1])
-		# Your code here: Use the Eliminate Strategy
+
+		# eliminate value
 		eliminate(values)
-		# Your code here: Use the Only Choice Strategy
+
+		# prune using only choice
 		only_choice(values)
+
 		# Check how many boxes have a determined value, to compare
 		solved_values_after = len([box for box in values.keys() if len(values[box]) == 1])
+
 		# If no new values were added, stop the loop.
 		stalled = solved_values_before == solved_values_after
+
 		# Sanity check, return False if there is a box with zero available values:
 		if len([box for box in values.keys() if len(values[box]) == 0]):
 			return False
 	return values
 
 def search(values):
-	"""Using depth-first search and propagation, try all possible values."""
-
+	"""Using depth-first search and propagation, try all possible values.
+	Args:
+		values(dict): The sudoku in dictionary form
+	Returns:
+		the values dictionary with depth first search done.
+	"""
 	# First, reduce the puzzle using the previous function
-	#print("In Search")
 	values = reduce_puzzle(values)
 	if values is False:
 		return False ## Failed earlier
@@ -244,7 +271,6 @@ def naked_twins(values):
 	"""Eliminate values using the naked twins strategy.
 	Args:
 		values(dict): a dictionary of the form {'box_name': '123456789', ...}
-
 	Returns:
 		the values dictionary with the naked twins eliminated from peers.
 	"""
